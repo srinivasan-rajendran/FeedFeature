@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FF876CD52589489F005D2C50 /* FeedFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = FF876CD32589489F005D2C50 /* FeedFeature.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FF876CDD25894965005D2C50 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF876CDC25894965005D2C50 /* FeedItem.swift */; };
+		FF876CE025894A22005D2C50 /* FeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF876CDF25894A22005D2C50 /* FeedLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +17,7 @@
 		FF876CD32589489F005D2C50 /* FeedFeature.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedFeature.h; sourceTree = "<group>"; };
 		FF876CD42589489F005D2C50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF876CDC25894965005D2C50 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
+		FF876CDF25894A22005D2C50 /* FeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +52,7 @@
 			children = (
 				FF876CD32589489F005D2C50 /* FeedFeature.h */,
 				FF876CDC25894965005D2C50 /* FeedItem.swift */,
+				FF876CDF25894A22005D2C50 /* FeedLoader.swift */,
 				FF876CD42589489F005D2C50 /* Info.plist */,
 			);
 			path = FeedFeature;
@@ -134,6 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF876CE025894A22005D2C50 /* FeedLoader.swift in Sources */,
 				FF876CDD25894965005D2C50 /* FeedItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
