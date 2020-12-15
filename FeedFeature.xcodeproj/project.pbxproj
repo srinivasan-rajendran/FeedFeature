@@ -51,9 +51,17 @@
 			isa = PBXGroup;
 			children = (
 				FF876CD32589489F005D2C50 /* FeedFeature.h */,
+				FF876CE225894B19005D2C50 /* FeedFeature */,
+				FF876CD42589489F005D2C50 /* Info.plist */,
+			);
+			path = FeedFeature;
+			sourceTree = "<group>";
+		};
+		FF876CE225894B19005D2C50 /* FeedFeature */ = {
+			isa = PBXGroup;
+			children = (
 				FF876CDC25894965005D2C50 /* FeedItem.swift */,
 				FF876CDF25894A22005D2C50 /* FeedLoader.swift */,
-				FF876CD42589489F005D2C50 /* Info.plist */,
 			);
 			path = FeedFeature;
 			sourceTree = "<group>";
