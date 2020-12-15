@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		FF876CD52589489F005D2C50 /* FeedFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = FF876CD32589489F005D2C50 /* FeedFeature.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FF876CDD25894965005D2C50 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF876CDC25894965005D2C50 /* FeedItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FF876CD02589489F005D2C50 /* FeedFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeedFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF876CD32589489F005D2C50 /* FeedFeature.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedFeature.h; sourceTree = "<group>"; };
 		FF876CD42589489F005D2C50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF876CDC25894965005D2C50 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 			isa = PBXGroup;
 			children = (
 				FF876CD32589489F005D2C50 /* FeedFeature.h */,
+				FF876CDC25894965005D2C50 /* FeedItem.swift */,
 				FF876CD42589489F005D2C50 /* Info.plist */,
 			);
 			path = FeedFeature;
@@ -94,6 +97,7 @@
 				TargetAttributes = {
 					FF876CCF2589489F005D2C50 = {
 						CreatedOnToolsVersion = 12.0.1;
+						LastSwiftMigration = 1200;
 					};
 				};
 			};
@@ -130,6 +134,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF876CDD25894965005D2C50 /* FeedItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +265,7 @@
 		FF876CD92589489F005D2C50 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -277,6 +283,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.srinivasan.FeedFeature;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -284,6 +291,7 @@
 		FF876CDA2589489F005D2C50 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
