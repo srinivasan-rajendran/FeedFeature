@@ -10,7 +10,19 @@
 		FF876CD52589489F005D2C50 /* FeedFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = FF876CD32589489F005D2C50 /* FeedFeature.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FF876CDD25894965005D2C50 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF876CDC25894965005D2C50 /* FeedItem.swift */; };
 		FF876CE025894A22005D2C50 /* FeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF876CDF25894A22005D2C50 /* FeedLoader.swift */; };
+		FF876CEB25894BFB005D2C50 /* FeedFeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF876CEA25894BFB005D2C50 /* FeedFeatureTests.swift */; };
+		FF876CED25894BFB005D2C50 /* FeedFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF876CD02589489F005D2C50 /* FeedFeature.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FF876CEE25894BFB005D2C50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FF876CC72589489F005D2C50 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FF876CCF2589489F005D2C50;
+			remoteInfo = FeedFeature;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		FF876CD02589489F005D2C50 /* FeedFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeedFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -18,6 +30,9 @@
 		FF876CD42589489F005D2C50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF876CDC25894965005D2C50 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		FF876CDF25894A22005D2C50 /* FeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoader.swift; sourceTree = "<group>"; };
+		FF876CE825894BFB005D2C50 /* FeedFeatureTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeedFeatureTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF876CEA25894BFB005D2C50 /* FeedFeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedFeatureTests.swift; sourceTree = "<group>"; };
+		FF876CEC25894BFB005D2C50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,6 +43,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FF876CE525894BFB005D2C50 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF876CED25894BFB005D2C50 /* FeedFeature.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -35,6 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				FF876CD22589489F005D2C50 /* FeedFeature */,
+				FF876CE925894BFB005D2C50 /* FeedFeatureTests */,
 				FF876CD12589489F005D2C50 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				FF876CD02589489F005D2C50 /* FeedFeature.framework */,
+				FF876CE825894BFB005D2C50 /* FeedFeatureTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,6 +89,15 @@
 				FF876CDF25894A22005D2C50 /* FeedLoader.swift */,
 			);
 			path = FeedFeature;
+			sourceTree = "<group>";
+		};
+		FF876CE925894BFB005D2C50 /* FeedFeatureTests */ = {
+			isa = PBXGroup;
+			children = (
+				FF876CEA25894BFB005D2C50 /* FeedFeatureTests.swift */,
+				FF876CEC25894BFB005D2C50 /* Info.plist */,
+			);
+			path = FeedFeatureTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -98,17 +132,39 @@
 			productReference = FF876CD02589489F005D2C50 /* FeedFeature.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		FF876CE725894BFB005D2C50 /* FeedFeatureTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF876CF025894BFB005D2C50 /* Build configuration list for PBXNativeTarget "FeedFeatureTests" */;
+			buildPhases = (
+				FF876CE425894BFB005D2C50 /* Sources */,
+				FF876CE525894BFB005D2C50 /* Frameworks */,
+				FF876CE625894BFB005D2C50 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FF876CEF25894BFB005D2C50 /* PBXTargetDependency */,
+			);
+			name = FeedFeatureTests;
+			productName = FeedFeatureTests;
+			productReference = FF876CE825894BFB005D2C50 /* FeedFeatureTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		FF876CC72589489F005D2C50 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 1200;
 				TargetAttributes = {
 					FF876CCF2589489F005D2C50 = {
 						CreatedOnToolsVersion = 12.0.1;
 						LastSwiftMigration = 1200;
+					};
+					FF876CE725894BFB005D2C50 = {
+						CreatedOnToolsVersion = 12.0.1;
 					};
 				};
 			};
@@ -126,12 +182,20 @@
 			projectRoot = "";
 			targets = (
 				FF876CCF2589489F005D2C50 /* FeedFeature */,
+				FF876CE725894BFB005D2C50 /* FeedFeatureTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		FF876CCE2589489F005D2C50 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF876CE625894BFB005D2C50 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -150,7 +214,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FF876CE425894BFB005D2C50 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF876CEB25894BFB005D2C50 /* FeedFeatureTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FF876CEF25894BFB005D2C50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FF876CCF2589489F005D2C50 /* FeedFeature */;
+			targetProxy = FF876CEE25894BFB005D2C50 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		FF876CD62589489F005D2C50 /* Debug */ = {
@@ -325,6 +405,42 @@
 			};
 			name = Release;
 		};
+		FF876CF125894BFB005D2C50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 59PKSR6X25;
+				INFOPLIST_FILE = FeedFeatureTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.srinivasan.FeedFeatureTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		FF876CF225894BFB005D2C50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 59PKSR6X25;
+				INFOPLIST_FILE = FeedFeatureTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.srinivasan.FeedFeatureTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -342,6 +458,15 @@
 			buildConfigurations = (
 				FF876CD92589489F005D2C50 /* Debug */,
 				FF876CDA2589489F005D2C50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF876CF025894BFB005D2C50 /* Build configuration list for PBXNativeTarget "FeedFeatureTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF876CF125894BFB005D2C50 /* Debug */,
+				FF876CF225894BFB005D2C50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
