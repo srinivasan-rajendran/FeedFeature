@@ -25,18 +25,27 @@ public final class RemoteFeedLoader {
         case invalidData
     }
 
+    public enum Result: Equatable {
+        case success([FeedItem])
+        case failure(RemoteFeedLoader.Error)
+    }
+
     public init(url: URL, client: HTTPClient) {
         self.url = url
         self.client = client
     }
 
-    public func load(completion: @escaping (RemoteFeedLoader.Error) -> Void) {
+    public func load(completion: @escaping (RemoteFeedLoader.Result) -> Void) {
         client.get(from: url) { result in
             switch result {
-            case .success:
-                completion(.invalidData)
+            case .success(let data, _):
+                guard (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) != nil else {
+                    completion(.failure(.invalidData))
+                    return
+                }
+                completion(.success([]))
             case .failure:
-                completion(.connectivity)
+                completion(.failure(.connectivity))
             }
 
         }
