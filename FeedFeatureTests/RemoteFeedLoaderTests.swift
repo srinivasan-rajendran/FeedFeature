@@ -63,8 +63,31 @@ class RemoteFeedLoaderTests: XCTestCase {
     func test_load_deliversNoItemsOn200StatusWithEmptyJsonList() {
         let (sut, client) = makeSUT()
         expect(sut: sut, toCompleteWithResult: RemoteFeedLoader.Result.success([])) {
-            let validJson = Data("{\"items\": []}".utf8)
-            client.compete(withStatusCode: 200, data: validJson)
+            let validJsonEmptyItems = Data("{\"items\": []}".utf8)
+            client.compete(withStatusCode: 200, data: validJsonEmptyItems)
+        }
+    }
+
+    func test_load_on200StatusWithValidItems() {
+        let (sut, client) = makeSUT()
+        let item1 = FeedItem(id: UUID(), description: nil, location: nil, imageURL: URL(string: "https://test.com")!)
+        let item2 = FeedItem(id: UUID(), description: "description sample", location: "stockholm", imageURL: URL(string: "https://test1.com")!)
+        expect(sut: sut, toCompleteWithResult: .success([item1, item2])) {
+            let jsonItem1 = [
+                "id": item1.id.uuidString,
+                "image": item1.imageURL.absoluteString
+            ]
+            let jsonItem2 = [
+                "id": item2.id.uuidString,
+                "description": item2.description,
+                "location": item2.location,
+                "image": item2.imageURL.absoluteString
+            ]
+            let jsonItems = [
+                "items": [jsonItem1, jsonItem2]
+            ]
+            let jsonData = try! JSONSerialization.data(withJSONObject: jsonItems, options: .prettyPrinted)
+            client.compete(withStatusCode: 200, data: jsonData)
         }
     }
 
