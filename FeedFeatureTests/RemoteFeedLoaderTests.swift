@@ -74,15 +74,19 @@ class RemoteFeedLoaderTests: XCTestCase {
         let item2 = makeItem(id: UUID(), description: "description sample", location: "stockholm", imageURL: URL(string: "https://test2.com")!)
         let itemsModel = [item1.model, item2.model]
         expect(sut: sut, toCompleteWithResult: .success(itemsModel)) {
-            let jsonItems = [
-                "items": [item1.json, item2.json]
-            ]
-            let jsonData = try! JSONSerialization.data(withJSONObject: jsonItems, options: .prettyPrinted)
+            let jsonData = makeDataFromJSONItems(jsonItems: [item1.json, item2.json])
             client.compete(withStatusCode: 200, data: jsonData)
         }
     }
 
     // MARK: Helpers
+
+    private func makeDataFromJSONItems(jsonItems: [[String: Any]]) -> Data {
+        let jsonItems = [
+            "items": jsonItems
+        ]
+        return try! JSONSerialization.data(withJSONObject: jsonItems, options: .prettyPrinted)
+    }
 
     private func makeItem(id: UUID, description: String? = nil, location: String? = nil, imageURL: URL) -> (model: FeedItem, json: [String: Any]) {
         let model = FeedItem(id: id, description: description, location: location, imageURL: imageURL)
