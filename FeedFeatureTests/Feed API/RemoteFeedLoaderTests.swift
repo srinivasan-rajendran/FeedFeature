@@ -19,7 +19,7 @@ class RemoteFeedLoaderTests: XCTestCase {
         let url = URL(string: "https://example.com")!
         let (sut, client) = makeSUT()
 
-        sut.load { _ in }
+        sut.loadFeed { _ in }
 
         XCTAssertEqual(client.requestedURLs, [url])
     }
@@ -28,8 +28,8 @@ class RemoteFeedLoaderTests: XCTestCase {
         let url = URL(string: "https://example.com")!
         let (sut, client) = makeSUT()
 
-        sut.load { _ in }
-        sut.load { _ in }
+        sut.loadFeed { _ in }
+        sut.loadFeed { _ in }
 
         XCTAssertEqual(client.requestedURLs, [url, url])
     }
@@ -85,7 +85,7 @@ class RemoteFeedLoaderTests: XCTestCase {
         let client = HTTPClientSpy()
         var sut: RemoteFeedLoader? = RemoteFeedLoader(url: url, client: client)
         var capturedResults = [RemoteFeedLoader.Result]()
-        sut?.load { capturedResults.append($0) }
+        sut?.loadFeed { capturedResults.append($0) }
 
         sut = nil
         client.compete(withStatusCode: 200, data: makeDataFromJSONItems(jsonItems: []))
@@ -133,7 +133,7 @@ class RemoteFeedLoaderTests: XCTestCase {
 
     private func expect(sut: RemoteFeedLoader, toCompleteWithResult result: RemoteFeedLoader.Result, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
         var capturedResults = [RemoteFeedLoader.Result]()
-        sut.load { result in
+        sut.loadFeed { result in
             capturedResults.append(result)
         }
         action()
