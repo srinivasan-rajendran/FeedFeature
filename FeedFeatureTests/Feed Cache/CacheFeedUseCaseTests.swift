@@ -9,15 +9,28 @@ import XCTest
 import FeedFeature
 
 class FeedStore {
+
+    typealias DeletionCompletion = (Error?) -> Void
+
     var deleteCachedFeedCallCount = 0
     var insertCachedFeedCallCount = 0
+    private var deletionCompletions = [DeletionCompletion]()
 
-    func deleteCachedFeed() {
+    func deleteCachedFeed(completion: @escaping DeletionCompletion) {
         deleteCachedFeedCallCount += 1
+        deletionCompletions.append(completion)
     }
 
     func completeDeletion(with error: Error, index: Int = 0) {
+        deletionCompletions[index](error)
+    }
 
+    func completeDeletionSuccessfully(index: Int = 0) {
+        deletionCompletions[index](nil)
+    }
+
+    func insertFeed(items: [FeedItem]) {
+        insertCachedFeedCallCount += 1
     }
 }
 
@@ -29,7 +42,11 @@ class LocalFeedLoader {
     }
 
     func save(items: [FeedItem]) {
-        store.deleteCachedFeed()
+        store.deleteCachedFeed { [unowned self] error in
+            if error == nil {
+                self.store.insertFeed(items: items)
+            }
+        }
     }
 }
 
@@ -43,17 +60,26 @@ class CacheFeedUseCaseTests: XCTestCase {
 
     func test_save_requestsCacheDeletion() {
         let (sut, store) = makeSUT()
-        sut.save(items: [uniqueItems(), uniqueItems()])
+        let items = [uniqueItems(), uniqueItems()]
+        sut.save(items: items)
         XCTAssertEqual(store.deleteCachedFeedCallCount, 1)
     }
 
     func test_save_doesNotRequestCacheInsertionOnDeletionError() {
         let (sut, store) = makeSUT()
-        sut.save(items: [uniqueItems(), uniqueItems()])
+        let items = [uniqueItems(), uniqueItems()]
+        sut.save(items: items)
         store.completeDeletion(with: anyNSError())
         XCTAssertEqual(store.insertCachedFeedCallCount, 0)
     }
 
+    func test_requestNewCacheInsertionOnSuccessfulDeletion() {
+        let (sut, store) = makeSUT()
+        let items = [uniqueItems(), uniqueItems()]
+        sut.save(items: items)
+        store.completeDeletionSuccessfully()
+        XCTAssertEqual(store.insertCachedFeedCallCount, 1)
+    }
 
     // MARK: Helpers
 
