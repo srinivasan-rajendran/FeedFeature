@@ -44,9 +44,7 @@ public class LocalFeedLoader {
                 completion(.failure(error))
             case let .found(items, timestamp) where self.validate(timestamp) :
                 completion(.success(items.toModel()))
-            case .found:
-                completion(.success([]))
-            case .empty:
+            case .found, .empty:
                 completion(.success([]))
             }
         }

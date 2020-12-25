@@ -62,11 +62,10 @@ class ValidateFeedCacheUseCaseTests: XCTestCase {
     func test_validateCache_doesNotDeliverCompletionWhenSUTIsDeallocated() {
         let store = FeedStoreSpy()
         var sut: LocalFeedLoader? = LocalFeedLoader(store: store, currentDate: Date.init)
-        var receivedResults = [LocalFeedLoader.LoadResult]()
         sut?.validateCache()
         sut = nil
         store.completeRetrieval(with: anyNSError())
-        XCTAssertTrue(store.receivedMessages.isEmpty)
+        XCTAssertEqual(store.receivedMessages, [.retrieve])
     }
 
 
