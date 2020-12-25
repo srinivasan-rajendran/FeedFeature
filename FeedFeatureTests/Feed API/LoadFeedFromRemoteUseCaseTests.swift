@@ -8,7 +8,7 @@
 import XCTest
 import FeedFeature
 
-class LoadFeedFromRemoteUseCaseTests: XCTestCase {
+class loadFromRemoteUseCaseTests: XCTestCase {
 
     func test_init_doesNotRequestDataFromURL() {
         let (_, client) = makeSUT()
@@ -19,7 +19,7 @@ class LoadFeedFromRemoteUseCaseTests: XCTestCase {
         let url = URL(string: "https://example.com")!
         let (sut, client) = makeSUT()
 
-        sut.loadFeed { _ in }
+        sut.load { _ in }
 
         XCTAssertEqual(client.requestedURLs, [url])
     }
@@ -28,8 +28,8 @@ class LoadFeedFromRemoteUseCaseTests: XCTestCase {
         let url = URL(string: "https://example.com")!
         let (sut, client) = makeSUT()
 
-        sut.loadFeed { _ in }
-        sut.loadFeed { _ in }
+        sut.load { _ in }
+        sut.load { _ in }
 
         XCTAssertEqual(client.requestedURLs, [url, url])
     }
@@ -85,7 +85,7 @@ class LoadFeedFromRemoteUseCaseTests: XCTestCase {
         let client = HTTPClientSpy()
         var sut: RemoteFeedLoader? = RemoteFeedLoader(url: url, client: client)
         var capturedResults = [RemoteFeedLoader.Result]()
-        sut?.loadFeed { capturedResults.append($0) }
+        sut?.load { capturedResults.append($0) }
 
         sut = nil
         client.compete(withStatusCode: 200, data: makeDataFromJSONItems(jsonItems: []))
@@ -131,7 +131,7 @@ class LoadFeedFromRemoteUseCaseTests: XCTestCase {
 
     private func expect(sut: RemoteFeedLoader, toCompleteWithResult expectedResult: RemoteFeedLoader.Result, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
         let exp = expectation(description: "wait for load completion")
-        sut.loadFeed { receivedResult in
+        sut.load { receivedResult in
             switch (receivedResult, expectedResult) {
             case let (.success(receivedItems), .success(expectedItems)):
                 XCTAssertEqual(receivedItems, expectedItems, file: file, line: line)
