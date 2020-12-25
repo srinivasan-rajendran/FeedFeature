@@ -54,8 +54,14 @@ public class LocalFeedLoader {
     }
 
     public func validateCache() {
-        store.retrieveFeed { _ in }
-        store.deleteCachedFeed { _ in }
+        store.retrieveFeed { [unowned self] result in
+            switch result {
+            case .failure:
+                self.store.deleteCachedFeed { _ in }
+            default:
+                break
+            }
+        }
     }
 
     private func validate(_ timestamp: Date) -> Bool {
