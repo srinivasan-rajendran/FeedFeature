@@ -49,6 +49,17 @@ class ValidateFeedCacheUseCaseTests: XCTestCase {
         XCTAssertEqual(store.receivedMessages, [.retrieve, .deleteCachedFeed])
     }
 
+    func test_validateCache_shouldDeleteCacheOnMoreThanSevenDaysOldCache() {
+        let fixedCurrentDate = Date()
+        let sevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7).adding(seconds: -1)
+        let (sut, store) = makeSUT( currentDate: { fixedCurrentDate } )
+        sut.validateCache()
+        let items = uniqueItems()
+        store.completeRetrieval(localItems: items.local, timestamp: sevenDaysOldTimestamp)
+        XCTAssertEqual(store.receivedMessages, [.retrieve, .deleteCachedFeed])
+    }
+
+
     // MARK: Helpers
 
     private func makeSUT(currentDate: @escaping () -> Date = Date.init ,file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalFeedLoader, store: FeedStoreSpy) {
