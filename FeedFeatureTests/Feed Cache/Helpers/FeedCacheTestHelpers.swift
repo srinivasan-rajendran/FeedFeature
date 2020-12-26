@@ -21,8 +21,12 @@ func uniqueItem() -> FeedItem {
 
 extension Date {
 
+    private var feedCacheAgeInDays: Int {
+        return 7
+    }
+
     func minusFeedCacheMaxAge() -> Date {
-        return self.adding(days: -7)
+        return self.adding(days: -feedCacheAgeInDays)
     }
 
     func adding(days: Int) -> Date {
