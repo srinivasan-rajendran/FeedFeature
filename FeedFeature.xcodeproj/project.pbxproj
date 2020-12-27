@@ -32,6 +32,7 @@
 		FFC6987925968D940096CCC1 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC6987825968D940096CCC1 /* SharedTestHelpers.swift */; };
 		FFC6988B259785F90096CCC1 /* FeedCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC6988A259785F90096CCC1 /* FeedCachePolicy.swift */; };
 		FFC698902597CCF30096CCC1 /* CodableFeedStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC6988F2597CCF30096CCC1 /* CodableFeedStoreTests.swift */; };
+		FFC6989E2598C8A10096CCC1 /* CodableFeedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC6989D2598C8A10096CCC1 /* CodableFeedStore.swift */; };
 		FFED419C258A893700673E87 /* RemoteFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFED419B258A893700673E87 /* RemoteFeedLoader.swift */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,7 @@
 		FFC6987825968D940096CCC1 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		FFC6988A259785F90096CCC1 /* FeedCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCachePolicy.swift; sourceTree = "<group>"; };
 		FFC6988F2597CCF30096CCC1 /* CodableFeedStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableFeedStoreTests.swift; sourceTree = "<group>"; };
+		FFC6989D2598C8A10096CCC1 /* CodableFeedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableFeedStore.swift; sourceTree = "<group>"; };
 		FFED419B258A893700673E87 /* RemoteFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeedLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -207,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				FFC69719259296910096CCC1 /* LocalFeedLoader.swift */,
+				FFC6989D2598C8A10096CCC1 /* CodableFeedStore.swift */,
 				FFC69722259296FF0096CCC1 /* FeedStore.swift */,
 				FFC69853259556390096CCC1 /* LocalFeedItem.swift */,
 				FFC6988A259785F90096CCC1 /* FeedCachePolicy.swift */,
@@ -381,6 +384,7 @@
 				FFC69854259556390096CCC1 /* LocalFeedItem.swift in Sources */,
 				FFC69723259296FF0096CCC1 /* FeedStore.swift in Sources */,
 				FFC6971A259296920096CCC1 /* LocalFeedLoader.swift in Sources */,
+				FFC6989E2598C8A10096CCC1 /* CodableFeedStore.swift in Sources */,
 				FFC693D1258E20180096CCC1 /* HTTPClient.swift in Sources */,
 				FF876CDD25894965005D2C50 /* FeedItem.swift in Sources */,
 				FFC69521259139480096CCC1 /* URLSessionHTTPClient.swift in Sources */,
