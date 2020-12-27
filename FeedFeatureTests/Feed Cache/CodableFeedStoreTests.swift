@@ -148,30 +148,6 @@ class CodableFeedStoreTests: XCTestCase, FailableFeedStoreSpecs {
 
     // MARK: Helpers
 
-    @discardableResult
-    private func delete(_ sut: FeedStore, file: StaticString = #filePath, line: UInt = #line) -> Error? {
-        var deletionError: Error?
-        let exp = expectation(description: "wait for completion")
-        sut.deleteCachedFeed { receivedDeletionerror in
-            deletionError = receivedDeletionerror
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 1.0)
-        return deletionError
-    }
-
-    @discardableResult
-    private func insert(_ cache: (feed: [LocalFeedItem], timestamp: Date), to sut: FeedStore, file: StaticString = #filePath, line: UInt = #line) -> Error? {
-        var insertionError: Error?
-        let exp = expectation(description: "wait for completion")
-        sut.insertFeed(items: cache.feed, timestamp: cache.timestamp) { receviedInsertionError in
-            insertionError = receviedInsertionError
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 1.0)
-        return insertionError
-    }
-
     private func expect(sut: FeedStore, toRetrieveTwice expectedResult: RetrieveCachedFeedResult, file: StaticString = #filePath, line: UInt = #line) {
         expect(sut: sut, toRetrieve: expectedResult, file: file, line: line)
         expect(sut: sut, toRetrieve: expectedResult, file: file, line: line)
