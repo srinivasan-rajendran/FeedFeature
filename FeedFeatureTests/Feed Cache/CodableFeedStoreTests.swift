@@ -117,9 +117,35 @@ class CodableFeedStoreTests: XCTestCase {
                     XCTAssertEqual(expectedItems, retrievedItems)
                     XCTAssertEqual(expectedDate, timestamp)
                 default:
-                    XCTFail("Expected \(expectedItems), received \(result) instead")
+                    XCTFail("retrieving twice Expected \(expectedItems), received \(result) instead")
                 }
                 exp.fulfill()
+            }
+        }
+        wait(for: [exp], timeout: 1.0)
+    }
+
+    func test_retrieve_hasNoSideEffectsOnNonEmptyCache() {
+        let sut = makeSUT()
+        let expectedItems = uniqueItems().local
+        let expectedDate = Date()
+        let exp = expectation(description: "wait for completion")
+        sut.insertFeed(items: expectedItems, timestamp: expectedDate) { insertionError in
+            XCTAssertNil(insertionError, "Expected Feed to be inserted Successfully")
+            sut.retrieveFeed { firstResult in
+                sut.retrieveFeed { secondResult in
+                    switch (firstResult, secondResult) {
+                    case let (.found(firstFoundItem, firstFoundTimestamp), .found(secondFoundItem, secondFoundTimestamp)):
+                        XCTAssertEqual(firstFoundItem, expectedItems)
+                        XCTAssertEqual(firstFoundTimestamp, expectedDate)
+
+                        XCTAssertEqual(secondFoundItem, expectedItems)
+                        XCTAssertEqual(secondFoundTimestamp, expectedDate)
+                    default:
+                        XCTFail("Expected \(expectedItems), received \(firstResult) and \(secondResult) instead")
+                    }
+                    exp.fulfill()
+                }
             }
         }
         wait(for: [exp], timeout: 1.0)
