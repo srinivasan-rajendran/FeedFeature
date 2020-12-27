@@ -8,6 +8,36 @@
 import XCTest
 import FeedFeature
 
+protocol FeedStoreSpecs {
+     func test_retrieve_deliversEmptyOnEmptyCache()
+     func test_retrieve_hasNoSideEffectsOnEmptyCache()
+     func test_retrieve_deliversFoundValuesOnNonEmptyCache()
+     func test_retrieve_hasNoSideEffectsOnNonEmptyCache()
+
+     func test_insert_overridesPreviouslyInsertedCachedValues()
+
+     func test_delete_hasNoSideEffectsOnEmptyCache()
+     func test_delete_emptiesPreviouslyInsertedCache()
+
+     func test_storeSideEffects_runSerially()
+}
+
+protocol FailableRetrieveFeedStoreSpecs {
+    func test_retrieve_deliversFailureOnRetrievalError()
+    func test_retrieve_hasNoSideEffectOnFailure()
+}
+
+protocol FailableInsertFeedStoreSpecs {
+    func test_insert_deliversErrorOnInsertionError()
+    func test_insert_hasNoSideEffectsOnInsertionError()
+}
+
+protocol FailableDeletionFeedStoreSpecs {
+    func test_delete_deliversErrorOnDeletionError()
+    func test_delete_hasNoSideEffectOnDeletionError()
+}
+
+
 class CodableFeedStoreTests: XCTestCase {
 
     override func setUp() {
@@ -80,6 +110,15 @@ class CodableFeedStoreTests: XCTestCase {
         XCTAssertNotNil(insertionError, "Expected Cache insertion to fail with an error")
     }
 
+    func test_insert_hasNoSideEffectsOnInsertionError() {
+        let invalidStoreURL = URL(string: "invalid://store-url")!
+        let sut = makeSUT(storeURL: invalidStoreURL)
+        let items = uniqueItems().local
+        let timestamp = Date()
+        insert((items, timestamp), to: sut)
+        expect(sut: sut, toRetrieve: .empty)
+    }
+
     func test_delete_hasNoSideEffectsOnEmptyCache() {
         let sut = makeSUT()
         let deletionError = delete(sut)
@@ -101,6 +140,13 @@ class CodableFeedStoreTests: XCTestCase {
         let sut = makeSUT(storeURL: noDeletePermissionURL)
         let deletionError = delete(sut)
         XCTAssertNotNil(deletionError, "Expected Cache Deletion to fail")
+        expect(sut: sut, toRetrieve: .empty)
+    }
+
+    func test_delete_hasNoSideEffectOnDeletionError() {
+        let noDeletePermissionURL = cachesDirectory()
+        let sut = makeSUT(storeURL: noDeletePermissionURL)
+        delete(sut)
         expect(sut: sut, toRetrieve: .empty)
     }
 
@@ -133,7 +179,7 @@ class CodableFeedStoreTests: XCTestCase {
     // MARK: Helpers
 
     @discardableResult
-    func delete(_ sut: FeedStore, file: StaticString = #filePath, line: UInt = #line) -> Error? {
+    private func delete(_ sut: FeedStore, file: StaticString = #filePath, line: UInt = #line) -> Error? {
         var deletionError: Error?
         let exp = expectation(description: "wait for completion")
         sut.deleteCachedFeed { receivedDeletionerror in
@@ -145,7 +191,7 @@ class CodableFeedStoreTests: XCTestCase {
     }
 
     @discardableResult
-    func insert(_ cache: (feed: [LocalFeedItem], timestamp: Date), to sut: FeedStore, file: StaticString = #filePath, line: UInt = #line) -> Error? {
+    private func insert(_ cache: (feed: [LocalFeedItem], timestamp: Date), to sut: FeedStore, file: StaticString = #filePath, line: UInt = #line) -> Error? {
         var insertionError: Error?
         let exp = expectation(description: "wait for completion")
         sut.insertFeed(items: cache.feed, timestamp: cache.timestamp) { receviedInsertionError in
@@ -156,12 +202,12 @@ class CodableFeedStoreTests: XCTestCase {
         return insertionError
     }
 
-    func expect(sut: FeedStore, toRetrieveTwice expectedResult: RetrieveCachedFeedResult, file: StaticString = #filePath, line: UInt = #line) {
+    private func expect(sut: FeedStore, toRetrieveTwice expectedResult: RetrieveCachedFeedResult, file: StaticString = #filePath, line: UInt = #line) {
         expect(sut: sut, toRetrieve: expectedResult, file: file, line: line)
         expect(sut: sut, toRetrieve: expectedResult, file: file, line: line)
     }
 
-    func expect(sut: FeedStore, toRetrieve expectedResult: RetrieveCachedFeedResult, file: StaticString = #filePath, line: UInt = #line) {
+    private func expect(sut: FeedStore, toRetrieve expectedResult: RetrieveCachedFeedResult, file: StaticString = #filePath, line: UInt = #line) {
         let exp = expectation(description: "wait for completion")
         sut.retrieveFeed { foundResult in
             switch (foundResult, expectedResult) {
