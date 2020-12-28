@@ -15,27 +15,28 @@ public class LocalFeedLoader {
         self.store = store
         self.currentDate = currentDate
     }
+}
+
+extension LocalFeedLoader {
+
+    public typealias SaveResult = Result<Void, Error>
+
+    public func save(items: [FeedItem], completion: @escaping (SaveResult) -> Void) {
+        store.deleteCachedFeed { [weak self] deletionResult in
+            guard let self = self else { return }
+            switch deletionResult {
+            case .success:
+                self.cache(items: items, completion: completion)
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
 
     private func cache(items: [FeedItem], completion: @escaping (SaveResult) -> Void) {
         store.insertFeed(items: items.toLocal(), timestamp: self.currentDate()) { [weak self] error in
             guard self != nil  else { return }
             completion(error)
-        }
-    }
-}
-
-extension LocalFeedLoader {
-
-    public typealias SaveResult = Error?
-
-    public func save(items: [FeedItem], completion: @escaping (SaveResult) -> Void) {
-        store.deleteCachedFeed { [weak self] error in
-            guard let self = self else { return }
-            if let cacheDeletionError = error {
-                completion(cacheDeletionError)
-            } else {
-                self.cache(items: items, completion: completion)
-            }
         }
     }
 }

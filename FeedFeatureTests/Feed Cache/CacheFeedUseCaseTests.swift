@@ -92,8 +92,13 @@ class CacheFeedUseCaseTests: XCTestCase {
     private func expect(sut: LocalFeedLoader, toCompleteWith expectedError: NSError?, actions: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
         let exp = expectation(description: "wait for completion")
         var receivedError: Error?
-        sut.save(items: uniqueItems().models) { error in
-            receivedError = error
+        sut.save(items: uniqueItems().models) { result in
+            switch result {
+            case let .failure(error):
+                receivedError = error
+            default:
+                break
+            }
             exp.fulfill()
         }
         actions()
