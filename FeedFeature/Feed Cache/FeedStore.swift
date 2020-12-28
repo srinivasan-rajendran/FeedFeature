@@ -7,14 +7,19 @@
 
 import Foundation
 
-public enum CachedFeed {
-    case empty
-    case found(feedItems: [LocalFeedItem], timestamp: Date)
+public struct CachedFeed {
+    public let feed: [LocalFeedItem]
+    public let timestamp: Date
+
+    public init(feed: [LocalFeedItem], timestamp: Date) {
+        self.feed = feed
+        self.timestamp = timestamp
+    }
 }
 
 public protocol FeedStore {
 
-    typealias RetrievalResult = Result<CachedFeed, Error>
+    typealias RetrievalResult = Result<CachedFeed?, Error>
 
     typealias DeletionCompletion = (Error?) -> Void
     typealias InsertionCompletion = (Error?) -> Void
