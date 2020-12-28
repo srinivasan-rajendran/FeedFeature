@@ -7,15 +7,7 @@
 
 import Foundation
 
-public struct CachedFeed {
-    public let feed: [LocalFeedItem]
-    public let timestamp: Date
-
-    public init(feed: [LocalFeedItem], timestamp: Date) {
-        self.feed = feed
-        self.timestamp = timestamp
-    }
-}
+public typealias CachedFeed = (feed: [LocalFeedItem], timestamp: Date)
 
 public protocol FeedStore {
 
