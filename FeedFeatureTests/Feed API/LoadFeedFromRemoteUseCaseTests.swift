@@ -148,9 +148,9 @@ class loadFromRemoteUseCaseTests: XCTestCase {
         var requestedURLs: [URL] {
             return messages.map { $0.url }
         }
-        private var messages = [(url: URL, completion: (HTTPClientResult) -> Void)]()
+        private var messages = [(url: URL, completion: (HTTPClient.Result) -> Void)]()
 
-        func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void) {
+        func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) {
             messages.append((url, completion))
         }
 
@@ -160,7 +160,7 @@ class loadFromRemoteUseCaseTests: XCTestCase {
 
         func compete(withStatusCode code: Int, data: Data,  at index: Int = 0) {
             let urlResponse = HTTPURLResponse(url: requestedURLs[index], statusCode: code, httpVersion: nil, headerFields: nil)!
-            messages[index].completion(.success(data, urlResponse))
+            messages[index].completion(.success((data, urlResponse)))
         }
     }
 
