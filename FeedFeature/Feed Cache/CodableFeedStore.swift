@@ -63,14 +63,11 @@ public class CodableFeedStore: FeedStore {
     public func insertFeed(items: [LocalFeedItem], timestamp: Date, completion: @escaping InsertionCompletion) {
         let storeURL = self.storeURL
         queue.async(flags: .barrier) {
-            do {
+            completion(Result(catching: {
                 let encoder = JSONEncoder()
                 let encodedCache = try encoder.encode(Cache(items: items.map { CodableFeedItem.init(item: $0) }, date: timestamp))
                 try encodedCache.write(to: storeURL)
-                completion(.success(()))
-            } catch {
-                completion(.failure(error))
-            }
+            }))
         }
     }
 
@@ -81,12 +78,9 @@ public class CodableFeedStore: FeedStore {
                 completion(.success(()))
                 return
             }
-            do {
+            completion(Result(catching: {
                 try FileManager.default.removeItem(at: storeURL)
-                completion(.success(()))
-            } catch {
-                completion(.failure(error))
-            }
+            }))
         }
     }
 }
