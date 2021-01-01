@@ -2,7 +2,7 @@
 //  RemoteFeedItem.swift
 //  FeedFeature
 //
-//  Created by Srinivasan Rajendran on 2020-12-25.
+//  Created by Srinivasann Rajendran on 2020-12-25.
 //
 
 import Foundation
